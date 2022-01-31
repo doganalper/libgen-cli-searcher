@@ -1,7 +1,0 @@
-0 - id <td>1290626</td>
-1 - authors <td><a href="search.php?req=Friedrich Engels&amp;column[]=author">Friedrich Engels</a></td>
-2 - title <td width="500"><a href="book/index.php?md5=33E7ED7EC19834E824984BEFF99C226B" title="" id="1290626">Principles of Communism</a></td>
-3 - publisher <td>Foreign Languages Press</td>
-4 - year <td nowrap="">1977</td>
-5 - pages <td>36</td>
-6 - language <td></td>

@@ -2,22 +2,35 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
 type SearchRow struct {
-	id        string
-	author    string
-	title     string
-	publisher string
-	year      string
-	pages     string
-	language  string
-	url       string
+	Id        string `json:"id"`
+	Author    string `json:"author"`
+	Title     string `json:"title"`
+	Publisher string `json:"publisher"`
+	Year      string `json:"year"`
+	Pages     string `json:"pages"`
+	Language  string `json:"language"`
+	Url       string `json:"url"`
 }
 
 var rows []string
+
+func (sr SearchRow) getListItem(idx int) {
+	fmt.Printf("%d - %s by %s, %s pages\n", idx, sr.Title, sr.Author, sr.Pages)
+}
+
+func createRow(rowString string) SearchRow {
+	createdRow := SearchRow{}
+
+	json.Unmarshal([]byte(string(rowString)), &createdRow)
+
+	return createdRow
+}
 
 func parseRows(element *goquery.Selection) {
 	row := map[string]string{}

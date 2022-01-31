@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -11,15 +10,15 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func getPage(url string) {
+func getPage(url string) []string {
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	findElements(resp.Body)
+	return findElements(resp.Body)
 }
 
-func findElements(body io.ReadCloser) {
+func findElements(body io.ReadCloser) []string {
 	doc, err := goquery.NewDocumentFromReader(body)
 
 	if err != nil {
@@ -31,10 +30,8 @@ func findElements(body io.ReadCloser) {
 			parseRows(s)
 		}
 	})
-	// BURADA KALDIN, JSON OLARAK DOSYAYA YAZIYORUZ.
-	// BUNU BÖYLE YAPMAK YERİNE ROWS OLARAK ITERABLE BİR ŞEKİLDE TUTUP KULLANICIYA
-	// CLI ÜZERİNDE GÖSTERMEM LAZIM
 	writeToFile("contents.json", rows)
+	return rows
 }
 
 func writeToFile(fileName string, content []string) {
@@ -44,5 +41,4 @@ func writeToFile(fileName string, content []string) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Println("Written on a file")
 }
