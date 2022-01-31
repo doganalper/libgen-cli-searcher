@@ -64,3 +64,9 @@ func parseRows(element *goquery.Selection) {
 	mapRow, _ := json.Marshal(row)
 	rows = append(rows, string(mapRow))
 }
+
+func getSelectedRowURL(idx int) {
+	selectedRow := createRow(rows[idx])
+
+	copyToClipboard(selectedRow.Url)
+}

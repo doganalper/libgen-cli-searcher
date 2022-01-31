@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-const BASE_URL = "https://libgen.is/search.php?req="
+const BASE_URL = "https://libgen.is/"
 
 func main() {
 	search, searchErr := getSearch()
@@ -13,9 +13,12 @@ func main() {
 		log.Fatalln(searchErr)
 	}
 	replacedString := strings.ReplaceAll(search, " ", "+")
-	searchResponse := getPage(BASE_URL + replacedString)
+	searchResponse := getPage(BASE_URL + "search.php?req=" + replacedString)
 
 	listSearch(searchResponse)
+	userSelection := getBookSelection()
+
+	getSelectedRowURL(userSelection)
 }
 
 /*
